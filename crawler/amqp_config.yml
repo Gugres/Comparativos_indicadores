@@ -1,0 +1,24 @@
+logger:
+  filepath: './tmp/logs'
+
+connection:
+  host: 'localhost'
+  user: 'guest'
+  pass: 'guest'
+  vhost: '/pupx'
+
+stock_crawl_processor:
+  class: stockCrawl
+
+queues:
+  input_crawl:
+    queueName: input_crawl
+    options:
+      durable: true
+    bindings:
+      - { global : 'stock.crawl' }
+
+processors:
+  stockCrawl:
+    listeners:
+      - { stockCrawl : stock_crawl_processor }
