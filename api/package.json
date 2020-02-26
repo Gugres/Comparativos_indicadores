@@ -13,6 +13,7 @@
   "author": "gabriel.giro.resende@outlook.com",
   "license": "ISC",
   "dependencies": {
+    "amqp_handler": "^0.0.1",
     "body-parser": "^1.19.0",
     "bottlejs": "^1.7.2",
     "bunyan": "^1.8.12",
@@ -21,10 +22,11 @@
     "express": "^4.17.1",
     "helmet": "^3.21.3",
     "joi": "^14.3.1",
+    "mongodb": "^3.5.4",
     "morgan": "^1.9.1",
     "pg": "^7.18.2",
-    "uuid": "^7.0.1",
-    "amqp_handler": "^0.0.1"
+    "redis": "^3.0.2",
+    "uuid": "^7.0.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

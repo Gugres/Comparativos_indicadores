@@ -21,3 +21,16 @@ services:
       - 5432:5432
     volumes:
       - ./docker/postgres/entrypoint-initdb:/docker-entrypoint-initdb.d
+
+  mongojur:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=pupx
+      - MONGO_INITDB_ROOT_PASSWORD=pupx
+    ports:
+      - 27017:27017
+
+  redisjur:
+    image: redis
+    ports:
+      - 6379:6379

@@ -5,6 +5,7 @@ const configDatabases = require('./config/databases');
 const configAmqp = require('./config/amqp');
 const configExpress = require('./config/express');
 const configEnviroment = require('./config/environment');
+const configCache = require('./config/cache');
 const createLogger = require('./logger');
 const createRoutes = require('./routes');
 const {
@@ -25,8 +26,15 @@ dependencyInjector.factory('app.logger', () => appLogger);
 configExpress(app); // Initialize express config
 configEnviroment(); // Initialize environment config
 
-configDatabases(dependencyInjector)
+// initialize cache
+configCache()
+  .then((client) => {
+    dependencyInjector.factory('app.cache', () => client);
+    appLogger.debug('cache initialized');
+    return configDatabases(dependencyInjector) // initialize databases
+  })
   .then(() => {
+    appLogger.debug('databases initialized');
     return configAmqp(dependencyInjector);
   })
   .then(() => {
