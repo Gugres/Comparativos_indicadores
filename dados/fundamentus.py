@@ -80,27 +80,26 @@ def get_data(*args, **kwargs):
                                                                        'P/Ativ.Circ.Liq.': rows.getchildren()[9].text,
                                                                        'EV/EBIT': rows.getchildren()[10].text,
                                                                        'EV/EBITDA': rows.getchildren()[11].text,
-                                                                       'Mrg.Liq.': rows.getchildren()[12].text,
-                                                                       'Liq.Corr.': rows.getchildren()[13].text,
-                                                                       'ROIC': rows.getchildren()[14].text,
-                                                                       'ROE': rows.getchildren()[15].text,
-                                                                       'Liq.2m.': rows.getchildren()[16].text,
-                                                                       'Pat.Liq': rows.getchildren()[17].text,
-                                                                       'Div.Brut/Pat.': rows.getchildren()[18].text,
-                                                                       'Cresc.5a': rows.getchildren()[19].text}})
-    
+                                                                       'Mrg.Liq.': rows.getchildren()[13].text,
+                                                                       'Liq.Corr.': rows.getchildren()[14].text,
+                                                                       'ROIC': rows.getchildren()[15].text,
+                                                                       'ROE': rows.getchildren()[16].text,
+                                                                       'Liq.2m.': rows.getchildren()[17].text,
+                                                                       'Pat.Liq': rows.getchildren()[18].text,
+                                                                       'Div.Brut/Pat.': rows.getchildren()[19].text,
+                                                                       'Cresc.5a': rows.getchildren()[20].text}})
+
     df = pd.DataFrame(lista)
-    print(df.head(20))
     df.to_excel("fundamentus_ind.xlsx")
     #return lista
-    
+
 if __name__ == '__main__':
     from waitingbar import WaitingBar
-    
+
     THE_BAR = WaitingBar('[*] Downloading...')
     lista = get_data()
     THE_BAR.stop()
-    
+
     # print('{0:<7} {1:<7} {2:<10} {3:<7} {4:<10} {5:<7} {6:<10} {7:<10} {8:<10} {9:<11} {10:<11} {11:<7} {12:<11} {13:<14} {14:<7}'.format('Papel',
     #                                                                                                                                       'Cotação',
     #                                                                                                                                       'P/L',

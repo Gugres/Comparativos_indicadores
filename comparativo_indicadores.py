@@ -35,8 +35,8 @@ def main():
     serie_comparativo_variancia = df_ativos_fundamentus.std()
 
     df_saida[ativo] = serie_ativo
-    df_saida["comparativo media: " + ativo] = serie_comparativo_media
-    df_saida["comparativo desvio padrao: " + ativo] = serie_comparativo_variancia
+    #df_saida["comparativo media: " + ativo] = serie_comparativo_media
+    #df_saida["comparativo desvio padrao: " + ativo] = serie_comparativo_variancia
 
   df_saida.to_excel("comparativos_indicadores.xlsx")
 
