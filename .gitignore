@@ -1,0 +1,10 @@
+tmp
+
+# python folders
+env
+__pycache__
+
+# nodejs folders
+node_modules
+vendor
+build
