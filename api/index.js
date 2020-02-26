@@ -2,6 +2,7 @@ const { join } = require('path');
 const Bottle = require('bottlejs');
 const express = require('express');
 const configDatabases = require('./config/databases');
+const configAmqp = require('./config/amqp');
 const configExpress = require('./config/express');
 const configEnviroment = require('./config/environment');
 const createLogger = require('./logger');
@@ -25,6 +26,9 @@ configExpress(app); // Initialize express config
 configEnviroment(); // Initialize environment config
 
 configDatabases(dependencyInjector)
+  .then(() => {
+    return configAmqp(dependencyInjector);
+  })
   .then(() => {
     generateDependencies(join(__dirname, 'controllers'), 'controllers', dependencyInjector); // Initialize controllers
     generateDependencies(join(__dirname, 'models'), 'models', dependencyInjector); // Initialize controllers

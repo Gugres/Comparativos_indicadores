@@ -2,9 +2,9 @@ const fs = require('fs');
 const { crawlStock } = require('../utils/crawl');
 
 class StockCrawlProcessor {
-  constructor(ch, container) {
-    this.channel = ch;
+  constructor(container) {
     this.amqpLogger = container['amqp_logger'];
+    this.publisher = container['publisher'];
   }
 
   /**
@@ -17,7 +17,7 @@ class StockCrawlProcessor {
     let dadosColetados = [];
     if (Array.isArray(messageData) && messageData.length > 0  ) {
       dadosColetados = await this.getStockInfo(messageData);
-      this.sendStockInfo(dadosColetados);
+      this.sendStockInfo(dadosColetados, message.fields);
     } else {
       throw new Error(`list of stock's names required`);
     }
@@ -36,15 +36,15 @@ class StockCrawlProcessor {
    * @param {Object} stockInfo stock info
    */
   sendStockInfo(stockInfo, fields) {
-    this.amqpLogger.debug(`sending stock info: ${JSON.stringify(stockInfo)}`);
-    this.channel.publish('global', `${fields['routingKey']}.result`, Buffer.from(JSON.stringify(stockInfo)));
+    this.amqpLogger.debug(`sending stock info`);
+    this.publisher.publish(`${fields['routingKey']}.result`, stockInfo);
   }
 }
 
 let stockCrawlInstance;
-module.exports = (ch, container) => {
+module.exports = (container) => {
   if (!stockCrawlInstance) {
-    stockCrawlInstance = new StockCrawlProcessor(ch, container);
+    stockCrawlInstance = new StockCrawlProcessor(container);
   }
 
   return stockCrawlInstance;

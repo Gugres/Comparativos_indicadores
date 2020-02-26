@@ -10,8 +10,8 @@ const getStockSchema = [
 ];
 
 module.exports = (app, container) => {
-  const controllers = container['controllers'];
   const validateMiddleware = container['middlewares']['validate'];
+  const stockController = container['controllers']['stock'];
 
-  app.get('/stock/:stock', validateMiddleware.validate(getStockSchema), controllers['stock'].getStock);
+  app.get('/stock/:stock', validateMiddleware.validate(getStockSchema), stockController.getStock.bind(stockController));
 }

@@ -1,0 +1,18 @@
+# Queue config
+logger:
+  name: amqp_logger
+  filepath: './tmp/logs'
+
+connection:
+  host: 'localhost'
+  user: 'guest'
+  pass: 'guest'
+  vhost: '/pupx'
+
+queues:
+  input_crawlers:
+    queueName: input_crawlers
+    options:
+      durable: true
+    bindings:
+      - { global : 'stock.crawl.result' }
