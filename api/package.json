@@ -1,0 +1,33 @@
+{
+  "name": "comparativo_indicadores_api",
+  "version": "1.0.0",
+  "description": "API para o projeto comparativo indicadores",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [
+    "nodejs",
+    "rest"
+  ],
+  "author": "gabriel.giro.resende@outlook.com",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "bottlejs": "^1.7.2",
+    "bunyan": "^1.8.12",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.21.3",
+    "joi": "^14.3.1",
+    "morgan": "^1.9.1",
+    "pg": "^7.18.2",
+    "uuid": "^7.0.1",
+    "amqp_handler": "^0.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "nodemon": "^2.0.2"
+  }
+}
