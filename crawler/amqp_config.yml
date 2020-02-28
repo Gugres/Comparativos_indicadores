@@ -2,7 +2,7 @@ logger:
   filepath: './tmp/logs'
 
 connection:
-  host: 'localhost'
+  host: 'rabbitmqjur'
   user: 'guest'
   pass: 'guest'
   vhost: '/pupx'

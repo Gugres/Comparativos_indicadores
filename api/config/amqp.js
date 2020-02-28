@@ -1,5 +1,5 @@
 const { join } = require('path');
-const createAmqpConnection = require('amqp_handler');
+const createAmqpConnection = require('@gagres/amqp_handler');
 
 module.exports = async (dependencyInjector) => {
   const amqpConnection = createAmqpConnection(join(__dirname, '../', 'amqp_config.yml'));

@@ -1,5 +1,5 @@
 const { join } = require('path');
-const createAmqpConnection = require('amqp_handler');
+const createAmqpConnection = require('@gagres/amqp_handler');
 const stockCrawl = require('./processors/stockCrawl');
 
 // Pass YAML amqp config file

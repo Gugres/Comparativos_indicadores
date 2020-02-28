@@ -12,7 +12,7 @@
     "amqp"
   ],
   "dependencies": {
-    "amqp_handler": "^0.0.1",
+    "@gagres/amqp_handler": "^0.0.1",
     "puppeteer": "^2.1.1"
   },
   "author": "gabriel.giro.resende@outlook.com",
