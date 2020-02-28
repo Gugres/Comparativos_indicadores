@@ -1,6 +1,24 @@
 version: '3'
 
 services:
+  apijur:
+    build:
+      context: ./docker/api
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./api:/usr/src/api
+
+  crawlerjur:
+    build:
+      context: ./docker/crawler
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./crawler:/usr/src/crawler
+
   rabbitmqjur:
     image: rabbitmq:3.7-management
     environment:
