@@ -1,22 +1,44 @@
-import sys
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+
+def BuscaAtivosPresentes(ativos_fundamentus, ativos_setor):
+  ativos_presentes = []
+  for x in ativos_setor:
+    x += "3"
+    if x in ativos_fundamentus:
+      ativos_presentes.append(x)
+  return ativos_presentes
+
+def CorrecaoSeparador(x):
+    x_novo = ""
+    for letra in x:
+        if letra != ".":
+            x_novo += letra
+    return x_novo
+
+def LimpezaDados(df_indicadores):
+  pass
 
 def PreparacaoIndicadores():
-  df_indicadores = pd.read_excel("dados/fundamentus_ind.xlsx").T
+  df_indicadores = pd.read_csv("dados/indicadores_completos.csv", sep=";", index_col="Papel")
   columns = df_indicadores.columns
+  text_values = ['Papel','Tipo','Data últ cot','Empresa','Setor','Subsetor','Últ balanço processado']
   for x in columns:
     try:
-      df_indicadores[x] = df_indicadores[x].map(lambda p: p.strip("%"))
-      df_indicadores[x] = df_indicadores[x].apply(TiraPonto)
-      df_indicadores[x] = df_indicadores[x].replace(",",".",regex=True).astype(float)
+      if x not in texts:    
+        df_indicadores[x] = df_indicadores[x].replace("%","",regex=True)
+        df_indicadores[x] = df_indicadores[x].replace('-',"0",regex=True)
+        df_indicadores[x] = df_indicadores[x].replace(np.nan,"0",regex=True)
+        df_indicadores[x] = df_indicadores[x].apply(CorrecaoSeparador)
+        df_indicadores[x] = df_indicadores[x].replace(",",".",regex=True).astype(float)
     except:
-      print(x)
       continue
-  df_indicadores.to_excel("dados/fundamentus_ind_ajustado.xlsx")
-
+  
 def main():
   df_B3 = pd.read_excel("dados/Setorial_B3_simplificado.xlsx")
-  df_indicadores = pd.read_excel("dados/fundamentus_ind_ajustado.xlsx")
+  df_indicadores = pd.read_csv("dados/fundamentus_ind_ajustado.csv", sep=";", index_col="Papel")
   df_relatorio = pd.read_excel("dados/relatorio_final_pupx.xlsx")
   df_saida = pd.DataFrame()
 
@@ -40,26 +62,8 @@ def main():
 
   df_saida.to_excel("comparativos_indicadores.xlsx")
 
-def BuscaAtivosPresentes(ativos_fundamentus, ativos_setor):
-  ativos_presentes = []
-  for x in ativos_setor:
-    x += "3"
-    if x in ativos_fundamentus:
-      ativos_presentes.append(x)
-  return ativos_presentes
-
-def TiraPonto(x):
-  x_novo = ""
-  for letra in x:
-    if letra != ".":
-      x_novo += letra
-  return x_novo
-
-def LimpezaDados(df_indicadores):
-  pass
-
 if __name__ == "__main__":
-  ajuste = str(input("Deseja ajustar a tabela de indicadores? "))
+  ajuste = str(input("Deseja ajustar a tabela de indicadores?\n"))
   if ajuste == "s":
     PreparacaoIndicadores()
   else: main()
